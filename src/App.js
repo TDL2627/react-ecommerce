@@ -4,6 +4,7 @@ import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component"
 
 
+
 const Shop = () => {
 return <h1>The shop</h1>
 };
