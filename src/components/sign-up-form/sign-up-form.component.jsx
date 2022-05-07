@@ -31,7 +31,7 @@ const handleSubmit = async (event) =>{
          alert("User Successfully created")
          resetFormFields();
     }catch(error){
-        if(error.code == 'auth/email-already-in-use'){
+        if(error.code === 'auth/email-already-in-use'){
             alert('Email already in use')
         }
     console.log('user creation error',error)
