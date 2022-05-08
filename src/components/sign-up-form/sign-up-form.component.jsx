@@ -47,7 +47,7 @@ setFormFields({...formFields, [name]: value })
 
     return(
         <div className='sign-up-container'>
-     <span>Sign Up
+     <span>Register
      </span>
      <form onSubmit={handleSubmit}>
       
