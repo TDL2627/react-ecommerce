@@ -28,9 +28,11 @@ const handleSubmit = async (event) =>{
     try{
        const response = await signInAuthUserWithEmailAndPassword (email, password)
        console.log(response)
+       alert('Welcome!')
          resetFormFields();
     }catch(error){
-  
+   alert('Login Error')
+   resetFormFields();
     }
 }
 
@@ -52,7 +54,7 @@ setFormFields({...formFields, [name]: value })
          <FormInput type="password" label="Password" required onChange={handleChange} value={password} name='password'/>
 <div className='buttons-container'>
 <Button buttonType={"inverted"}  type="submit">Sign In</Button>
-         <Button buttonType={"google"} onClick={signInWithGoogle} >Sign In with Google</Button>
+         <Button type='button' buttonType={"google"} onClick={signInWithGoogle}> Google</Button>
 </div>
 
      </form>
