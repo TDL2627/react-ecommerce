@@ -2,7 +2,7 @@ import '../sign-in-form/sign-in-form.styles.scss'
 import  {useState} from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
+import {  createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, signInWithGooglePopup ,} from '../../utils/firebase/firebase.utils';
 const defaultFormFields = {
     email:'',
     password:'',
@@ -17,11 +17,17 @@ const SignInForm = () => {
       setFormFields(defaultFormFields)
   }
 
+const signInWithGoogle = async () =>{
+    const {user} = await signInWithGooglePopup();
+    await createUserDocumentFromAuth(user);
+}
+
 const handleSubmit = async (event) =>{
     event.preventDefault();
   
     try{
-       
+       const response = await signInAuthUserWithEmailAndPassword (email, password)
+       console.log(response)
          resetFormFields();
     }catch(error){
   
@@ -44,8 +50,11 @@ setFormFields({...formFields, [name]: value })
          <FormInput type="email" label="Email" required onChange={handleChange} value={email} name='email'/>
 
          <FormInput type="password" label="Password" required onChange={handleChange} value={password} name='password'/>
+<div className='buttons-container'>
+<Button buttonType={"inverted"}  type="submit">Sign In</Button>
+         <Button buttonType={"google"} onClick={signInWithGoogle} >Sign In with Google</Button>
+</div>
 
-         <Button type="submit">Sign In</Button>
      </form>
         </div>
     )
