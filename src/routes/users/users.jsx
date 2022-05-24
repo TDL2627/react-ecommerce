@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { db } from "../../utils/firebase/firebase.utils";
 import { collection, query, getDocs } from "firebase/firestore";
-import Search from "../../components/search/search";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [search, SetSearch] = useState("");
 
   useEffect(() => {
-    /* TODO we need to show loading spinner when data is waiting */
-
     fetchUsers();
   }, []);
 
@@ -25,13 +23,38 @@ const Users = () => {
     }
   };
 
+  // search
+
+  const Search = (e) => {
+    e.preventDefault();
+    setUsers(
+      users.filter((users) =>
+        users.fullName.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  };
+
   return (
     <div>
       <h1>Users</h1>
-      <Search />
-      {users.map((users, key) => (
+      <form
+        onSubmit={(e) => {
+          Search(e);
+        }}
+      >
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => {
+            SetSearch(e.target.value);
+          }}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {users.map((user, key) => (
         <div key={key}>
-          <h1>{users.displayName}</h1>
+          <h1>{user.displayName}</h1>
         </div>
       ))}
     </div>
