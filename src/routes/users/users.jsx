@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "../../utils/firebase/firebase.utils";
-
 import { collection, query, getDocs } from "firebase/firestore";
+import Search from "../../components/search/search";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -15,9 +15,8 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
       const usersQuery = query(collection(db, "users"));
-      // get all docs based on query
+
       getDocs(usersQuery).then((snapshot) => {
-        // set the athletes to the snapshot
         setUsers(snapshot.docs.map((doc) => ({ uid: doc.id, ...doc.data() })));
       });
       console.log(users);
@@ -29,10 +28,7 @@ const Users = () => {
   return (
     <div>
       <h1>Users</h1>
-      <input type="search" placeholder="Search here" className="search" />
-      <div className="searchhijack">
-        <div className="searchEntry">Static placeholder</div>
-      </div>
+      <Search />
       {users.map((users, key) => (
         <div key={key}>
           <h1>{users.displayName}</h1>
