@@ -29,7 +29,10 @@ const Users = () => {
   return (
     <div>
       <h1>Users</h1>
-      <input type="search" placeholder="Search here" />
+      <input type="search" placeholder="Search here" className="search" />
+      <div className="searchhijack">
+        <div className="searchEntry">Static placeholder</div>
+      </div>
       {users.map((users, key) => (
         <div key={key}>
           <h1>{users.displayName}</h1>
