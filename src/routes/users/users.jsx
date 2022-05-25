@@ -7,9 +7,6 @@ const Users = () => {
   const [search, SetSearch] = useState("");
 
   useEffect(() => {
-    if (search === "") {
-      fetchUsers();
-    }
     fetchUsers();
   }, []);
 
@@ -20,7 +17,6 @@ const Users = () => {
       getDocs(usersQuery).then((snapshot) => {
         setUsers(snapshot.docs.map((doc) => ({ uid: doc.id, ...doc.data() })));
       });
-      console.log(users);
     } catch (err) {
       console.log(err);
     }
@@ -53,14 +49,24 @@ const Users = () => {
             SetSearch(e.target.value);
           }}
         />
-        <button type="submit">Search</button>
       </form>
 
-      {users.map((user, key) => (
-        <div key={key}>
-          <h1>{user.displayName}</h1>
-        </div>
-      ))}
+      {users
+        .filter((user) => {
+          if (search === "") {
+            return user;
+          } else if (
+            user.displayName.toLowerCase().includes(search.toLowerCase())
+          ) {
+            return user;
+          }
+        })
+
+        .map((user, key) => (
+          <div key={key}>
+            <h1>{user.displayName}</h1>
+          </div>
+        ))}
     </div>
   );
 };
