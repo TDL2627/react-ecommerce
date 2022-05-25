@@ -7,6 +7,9 @@ const Users = () => {
   const [search, SetSearch] = useState("");
 
   useEffect(() => {
+    if (search === "") {
+      fetchUsers();
+    }
     fetchUsers();
   }, []);
 
@@ -27,9 +30,10 @@ const Users = () => {
 
   const Search = (e) => {
     e.preventDefault();
+
     setUsers(
       users.filter((users) =>
-        users.fullName.toLowerCase().includes(search.toLowerCase())
+        users.displayName.toLowerCase().includes(search.toLowerCase())
       )
     );
   };
