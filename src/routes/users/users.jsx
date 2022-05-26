@@ -35,7 +35,7 @@ const Users = () => {
   };
 
   return (
-    <div>
+    <div className="ml-10">
       <h1>Users</h1>
       <form
         onSubmit={(e) => {
