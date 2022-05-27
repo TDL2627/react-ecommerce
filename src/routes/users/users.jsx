@@ -35,7 +35,7 @@ const Users = () => {
   };
 
   return (
-    <div className="ml-10">
+    <div>
       <h1>Users</h1>
       <form
         onSubmit={(e) => {
@@ -55,6 +55,8 @@ const Users = () => {
         .filter((user) => {
           if (search === "") {
             return user;
+          } else if (!user.displayName) {
+            return;
           } else if (
             user.displayName.toLowerCase().includes(search.toLowerCase())
           ) {
