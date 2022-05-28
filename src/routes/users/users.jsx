@@ -56,7 +56,7 @@ const Users = () => {
           if (search === "") {
             return user;
           } else if (!user.displayName) {
-            return;
+            return user;
           } else if (
             user.displayName.toLowerCase().includes(search.toLowerCase())
           ) {
