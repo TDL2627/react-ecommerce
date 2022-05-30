@@ -51,24 +51,30 @@ const Users = () => {
         />
       </form>
 
-      {users
-        .filter((user) => {
-          if (search === "") {
-            return user;
-          } else if (!user.displayName) {
-            return user;
-          } else if (
-            user.displayName.toLowerCase().includes(search.toLowerCase())
-          ) {
-            return user;
-          }
-        })
+      {search.length === 0 && users && users.length > 0
+        ? users
+            .filter((user) => {
+              if (search === "") {
+                return user;
+              } else if (!user.displayName) {
+                return user;
+              } else if (
+                user.displayName.toLowerCase().includes(search.toLowerCase())
+              ) {
+                return user;
+              }
+            })
 
-        .map((user, key) => (
-          <div key={key}>
-            <h1>{user.displayName}</h1>
-          </div>
-        ))}
+            .map((user, key) => (
+              <div key={key}>
+                <h1>{user.displayName}</h1>
+              </div>
+            ))
+        : users.length >= 0 && (
+            <div className="flex w-full p-4 items-center justify-center">
+              <p className="text-ua-lgray">No New Chats</p>
+            </div>
+          )}
     </div>
   );
 };
